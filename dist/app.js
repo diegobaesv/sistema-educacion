@@ -11,6 +11,7 @@ const alumnoRoutes_1 = __importDefault(require("./routes/alumnoRoutes"));
 const app = (0, express_1.default)();
 //Database
 //Midlewares
+app.use(express_1.default.json());
 //Routes
 app.use('/api/v1/alumnos', alumnoRoutes_1.default);
 exports.default = app;

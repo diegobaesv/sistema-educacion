@@ -14,7 +14,9 @@ export const obtenerAlumno = async (idAlumno: number) => {
 
 export const modificarAlumno = async (idAlumno: number, alumno:IAlumno) => {
     console.log('alumnoService::modificarAlumno',idAlumno,alumno);
+    console.log('Hola');
 }
+
 
 export const eliminarAlumno = async (idAlumno: number) => {
     console.log('alumnoService::eliminarAlumno',idAlumno);

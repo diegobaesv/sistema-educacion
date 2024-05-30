@@ -9,6 +9,4 @@ router.get('/:id',obtenerAlumno);
 router.put('/:id',modificarAlumno);
 router.delete('/:id',eliminarAlumno);
 
-
-
 export default router;

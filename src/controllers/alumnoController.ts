@@ -8,10 +8,8 @@ export const insertarAlumno = async (req: Request, res: Response) => {
 }
 
 export const listarAlumnos = async (req: Request, res: Response) => {
-    console.log('alumnoController::listarAlumnos');
-    console.log('hola2');
-    await alumnoService.listarAlumnos();
-    res.send('OK');
+    const alumnos = await alumnoService.listarAlumnos();
+    res.status(200).json(alumnos);
 }
 
 export const obtenerAlumno = async (req: Request, res: Response) => {

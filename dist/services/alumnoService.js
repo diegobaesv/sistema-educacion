@@ -10,12 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarAlumno = exports.modificarAlumno = exports.obtenerAlumno = exports.listarAlumnos = exports.insertarAlumno = void 0;
+const client_1 = require("@prisma/client");
+const prisma = new client_1.PrismaClient();
 const insertarAlumno = (alumno) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('alumnoService::insertarAlumno', alumno);
+    /*prisma.alumnos.create({
+        data: alumno
+    });*/
 });
 exports.insertarAlumno = insertarAlumno;
 const listarAlumnos = () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('alumnoService::listarAlumnos');
+    return yield prisma.alumnos.findMany();
 });
 exports.listarAlumnos = listarAlumnos;
 const obtenerAlumno = (idAlumno) => __awaiter(void 0, void 0, void 0, function* () {

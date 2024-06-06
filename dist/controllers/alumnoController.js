@@ -48,8 +48,8 @@ exports.listarAlumnos = listarAlumnos;
 const obtenerAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoController::obtenerAlumno');
     const { id } = req.params;
-    yield alumnoService.obtenerAlumno(Number(id));
-    res.send('OK');
+    const alumno = yield alumnoService.obtenerAlumno(Number(id));
+    res.status(200).json(alumno);
 });
 exports.obtenerAlumno = obtenerAlumno;
 const modificarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

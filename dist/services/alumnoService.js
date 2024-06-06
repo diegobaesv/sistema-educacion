@@ -35,6 +35,11 @@ const listarAlumnos = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.listarAlumnos = listarAlumnos;
 const obtenerAlumno = (idAlumno) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoService::obtenerAlumno', idAlumno);
+    return yield prisma.alumnos.findUnique({
+        where: {
+            id_alumno: idAlumno
+        }
+    });
 });
 exports.obtenerAlumno = obtenerAlumno;
 const modificarAlumno = (idAlumno, alumno) => __awaiter(void 0, void 0, void 0, function* () {

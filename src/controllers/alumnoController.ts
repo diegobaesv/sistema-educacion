@@ -15,8 +15,8 @@ export const listarAlumnos = async (req: Request, res: Response) => {
 export const obtenerAlumno = async (req: Request, res: Response) => {
     console.log('alumnoController::obtenerAlumno');
     const { id } = req.params;
-    await alumnoService.obtenerAlumno(Number(id))
-    res.send('OK');
+    const alumno = await alumnoService.obtenerAlumno(Number(id))
+    res.status(200).json(alumno);
 }
 
 export const modificarAlumno = async (req: Request, res: Response) => {

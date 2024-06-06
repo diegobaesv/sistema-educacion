@@ -26,6 +26,11 @@ export const listarAlumnos = async () => {
 
 export const obtenerAlumno = async (idAlumno: number) => {
     console.log('alumnoService::obtenerAlumno',idAlumno);
+    return await prisma.alumnos.findUnique({
+        where: {
+            id_alumno: idAlumno
+        }
+    });
 }
 
 export const modificarAlumno = async (idAlumno: number, alumno:IAlumno) => {

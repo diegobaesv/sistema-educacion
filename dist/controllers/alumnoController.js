@@ -36,34 +36,60 @@ exports.eliminarAlumno = exports.modificarAlumno = exports.obtenerAlumno = expor
 const alumnoService = __importStar(require("../services/alumnoService"));
 const insertarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoController::insertarAlumno');
-    const response = yield alumnoService.insertarAlumno(req.body);
-    res.status(200).json(response);
+    try {
+        const response = yield alumnoService.insertarAlumno(req.body);
+        res.status(200).json(response);
+    }
+    catch (error) {
+        res.status(500).json({ error: error });
+    }
 });
 exports.insertarAlumno = insertarAlumno;
 const listarAlumnos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const alumnos = yield alumnoService.listarAlumnos();
-    res.status(200).json(alumnos);
+    console.log('alumnoController::listarAlumnos');
+    try {
+        const alumnos = yield alumnoService.listarAlumnos();
+        res.status(200).json(alumnos);
+    }
+    catch (error) {
+        res.status(500).json({ error: error });
+    }
 });
 exports.listarAlumnos = listarAlumnos;
 const obtenerAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoController::obtenerAlumno');
-    const { id } = req.params;
-    const alumno = yield alumnoService.obtenerAlumno(Number(id));
-    res.status(200).json(alumno);
+    try {
+        const { id } = req.params;
+        const alumno = yield alumnoService.obtenerAlumno(Number(id));
+        res.status(200).json(alumno);
+    }
+    catch (error) {
+        res.status(500).json({ error: error });
+    }
 });
 exports.obtenerAlumno = obtenerAlumno;
 const modificarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoController::modificarAlumno');
-    const { id } = req.params;
-    yield alumnoService.modificarAlumno(Number(id), req.body);
-    res.send('OK');
+    try {
+        const { id } = req.params;
+        const response = yield alumnoService.modificarAlumno(Number(id), req.body);
+        res.status(200).json(response);
+    }
+    catch (error) {
+        res.status(500).json({ error: error });
+    }
 });
 exports.modificarAlumno = modificarAlumno;
 const eliminarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoController::eliminarAlumno');
-    const { id } = req.params;
-    yield alumnoService.eliminarAlumno(Number(id));
-    res.send('OK');
+    try {
+        const { id } = req.params;
+        const response = yield alumnoService.eliminarAlumno(Number(id));
+        res.status(200).json(response);
+    }
+    catch (error) {
+        res.status(500).json({ error: error });
+    }
 });
 exports.eliminarAlumno = eliminarAlumno;
 //# sourceMappingURL=alumnoController.js.map

@@ -44,10 +44,33 @@ const obtenerAlumno = (idAlumno) => __awaiter(void 0, void 0, void 0, function* 
 exports.obtenerAlumno = obtenerAlumno;
 const modificarAlumno = (idAlumno, alumno) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoService::modificarAlumno', idAlumno, alumno);
+    yield prisma.alumnos.update({
+        data: {
+            codigo: alumno.codigo,
+            documento_identidad: alumno.documentoIdentidad,
+            nombres: alumno.nombres,
+            apellido_paterno: alumno.apellidoPaterno,
+            apellido_materno: alumno.apellidoMaterno,
+            correo_institucional: alumno.correoInstitucional,
+            fecha_nacimiento: alumno.fechaNacimiento,
+            sexo: alumno.sexo,
+            direccion: alumno.direccion
+        },
+        where: {
+            id_alumno: idAlumno
+        }
+    });
+    return { respuesta: 'OK' };
 });
 exports.modificarAlumno = modificarAlumno;
 const eliminarAlumno = (idAlumno) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoService::eliminarAlumno', idAlumno);
+    yield prisma.alumnos.delete({
+        where: {
+            id_alumno: idAlumno
+        }
+    });
+    return { respuesta: 'OK' };
 });
 exports.eliminarAlumno = eliminarAlumno;
 //# sourceMappingURL=alumnoService.js.map

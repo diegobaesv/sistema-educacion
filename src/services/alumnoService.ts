@@ -35,9 +35,34 @@ export const obtenerAlumno = async (idAlumno: number) => {
 
 export const modificarAlumno = async (idAlumno: number, alumno:IAlumno) => {
     console.log('alumnoService::modificarAlumno',idAlumno,alumno);
+
+    await prisma.alumnos.update({
+        data: {
+            codigo: alumno.codigo,
+            documento_identidad: alumno.documentoIdentidad,
+            nombres: alumno.nombres,
+            apellido_paterno: alumno.apellidoPaterno,
+            apellido_materno: alumno.apellidoMaterno,
+            correo_institucional: alumno.correoInstitucional,
+            fecha_nacimiento: alumno.fechaNacimiento,
+            sexo: alumno.sexo,
+            direccion: alumno.direccion
+        },
+        where:{
+            id_alumno: idAlumno
+        }
+    });
+
+    return {respuesta:'OK'};
 }
 
 
 export const eliminarAlumno = async (idAlumno: number) => {
     console.log('alumnoService::eliminarAlumno',idAlumno);
+    await prisma.alumnos.delete({
+        where: {
+            id_alumno: idAlumno
+        }
+    });
+    return {respuesta:'OK'};
 }

@@ -3,33 +3,57 @@ import * as alumnoService from "../services/alumnoService";
 
 export const insertarAlumno = async (req: Request, res: Response) => {
     console.log('alumnoController::insertarAlumno');
-    const response = await alumnoService.insertarAlumno(req.body);
-    res.status(200).json(response);
+    try {
+        const response = await alumnoService.insertarAlumno(req.body);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
 }
 
 export const listarAlumnos = async (req: Request, res: Response) => {
-    const alumnos = await alumnoService.listarAlumnos();
-    res.status(200).json(alumnos);
+    console.log('alumnoController::listarAlumnos');
+    try {
+        const alumnos = await alumnoService.listarAlumnos();
+        res.status(200).json(alumnos);
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+    
 }
 
 export const obtenerAlumno = async (req: Request, res: Response) => {
     console.log('alumnoController::obtenerAlumno');
-    const { id } = req.params;
-    const alumno = await alumnoService.obtenerAlumno(Number(id))
-    res.status(200).json(alumno);
+    try {
+        const { id } = req.params;
+        const alumno = await alumnoService.obtenerAlumno(Number(id))
+        res.status(200).json(alumno);
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+    
 }
 
 export const modificarAlumno = async (req: Request, res: Response) => {
     console.log('alumnoController::modificarAlumno');
-    const { id } = req.params;
-    await alumnoService.modificarAlumno(Number(id),req.body)
-    res.send('OK');
+    try {
+        const { id } = req.params;
+        const response = await alumnoService.modificarAlumno(Number(id),req.body)
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
 }
 
 export const eliminarAlumno = async (req: Request, res: Response) => {
     console.log('alumnoController::eliminarAlumno');
-    const { id } = req.params;
-    await alumnoService.eliminarAlumno(Number(id));
-    res.send('OK');
+    try {
+        const { id } = req.params;
+        const response = await alumnoService.eliminarAlumno(Number(id));
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+    
 }
 

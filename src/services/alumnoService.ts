@@ -4,9 +4,20 @@ import { IAlumno } from "../models/Alumno";
 const prisma = new PrismaClient();
 
 export const insertarAlumno = async (alumno: IAlumno) => {
-    /*prisma.alumnos.create({
-        data: alumno
-    });*/
+    await prisma.alumnos.create({
+        data: {
+            codigo: alumno.codigo,
+            documento_identidad: alumno.documentoIdentidad,
+            nombres: alumno.nombres,
+            apellido_paterno: alumno.apellidoPaterno,
+            apellido_materno: alumno.apellidoMaterno,
+            correo_institucional: alumno.correoInstitucional,
+            fecha_nacimiento: alumno.fechaNacimiento,
+            sexo: alumno.sexo,
+            direccion: alumno.direccion
+        }
+    });
+    return {respuesta:'OK'};
 }
 
 export const listarAlumnos = async () => {

@@ -36,8 +36,8 @@ exports.eliminarAlumno = exports.modificarAlumno = exports.obtenerAlumno = expor
 const alumnoService = __importStar(require("../services/alumnoService"));
 const insertarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoController::insertarAlumno');
-    yield alumnoService.insertarAlumno(req.body);
-    res.send('OK');
+    const response = yield alumnoService.insertarAlumno(req.body);
+    res.status(200).json(response);
 });
 exports.insertarAlumno = insertarAlumno;
 const listarAlumnos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

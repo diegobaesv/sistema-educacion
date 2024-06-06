@@ -13,9 +13,20 @@ exports.eliminarAlumno = exports.modificarAlumno = exports.obtenerAlumno = expor
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const insertarAlumno = (alumno) => __awaiter(void 0, void 0, void 0, function* () {
-    /*prisma.alumnos.create({
-        data: alumno
-    });*/
+    yield prisma.alumnos.create({
+        data: {
+            codigo: alumno.codigo,
+            documento_identidad: alumno.documentoIdentidad,
+            nombres: alumno.nombres,
+            apellido_paterno: alumno.apellidoPaterno,
+            apellido_materno: alumno.apellidoMaterno,
+            correo_institucional: alumno.correoInstitucional,
+            fecha_nacimiento: alumno.fechaNacimiento,
+            sexo: alumno.sexo,
+            direccion: alumno.direccion
+        }
+    });
+    return { respuesta: 'OK' };
 });
 exports.insertarAlumno = insertarAlumno;
 const listarAlumnos = () => __awaiter(void 0, void 0, void 0, function* () {

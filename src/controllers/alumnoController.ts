@@ -3,8 +3,8 @@ import * as alumnoService from "../services/alumnoService";
 
 export const insertarAlumno = async (req: Request, res: Response) => {
     console.log('alumnoController::insertarAlumno');
-    await alumnoService.insertarAlumno(req.body);
-    res.send('OK');
+    const response = await alumnoService.insertarAlumno(req.body);
+    res.status(200).json(response);
 }
 
 export const listarAlumnos = async (req: Request, res: Response) => {

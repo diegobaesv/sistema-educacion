@@ -1,59 +1,46 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, alumnos } from "@prisma/client";
 import { IAlumno } from "../models/Alumno";
+import { RESPONSE_DELETE_OK, RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK } from "../shared/constants";
+import { fromPrismaAlumno, toPrismaAlumno } from "../mappers/alumnoMapper";
 
 const prisma = new PrismaClient();
 
 export const insertarAlumno = async (alumno: IAlumno) => {
+    
     await prisma.alumnos.create({
-        data: {
-            codigo: alumno.codigo,
-            documento_identidad: alumno.documentoIdentidad,
-            nombres: alumno.nombres,
-            apellido_paterno: alumno.apellidoPaterno,
-            apellido_materno: alumno.apellidoMaterno,
-            correo_institucional: alumno.correoInstitucional,
-            fecha_nacimiento: alumno.fechaNacimiento,
-            sexo: alumno.sexo,
-            direccion: alumno.direccion
-        }
+        data: toPrismaAlumno(alumno)
     });
-    return {respuesta:'OK'};
+    return RESPONSE_INSERT_OK;
 }
 
 export const listarAlumnos = async () => {
-    return await prisma.alumnos.findMany();
+    const alumnos: alumnos[] = await prisma.alumnos.findMany();
+    return alumnos.map((alumno: alumnos)=> fromPrismaAlumno(alumno));
 }
 
 export const obtenerAlumno = async (idAlumno: number) => {
     console.log('alumnoService::obtenerAlumno',idAlumno);
-    return await prisma.alumnos.findUnique({
+
+    const alumno: alumnos =  await prisma.alumnos.findUnique({
         where: {
             id_alumno: idAlumno
         }
     });
+
+    return fromPrismaAlumno(alumno);
 }
 
 export const modificarAlumno = async (idAlumno: number, alumno:IAlumno) => {
     console.log('alumnoService::modificarAlumno',idAlumno,alumno);
 
     await prisma.alumnos.update({
-        data: {
-            codigo: alumno.codigo,
-            documento_identidad: alumno.documentoIdentidad,
-            nombres: alumno.nombres,
-            apellido_paterno: alumno.apellidoPaterno,
-            apellido_materno: alumno.apellidoMaterno,
-            correo_institucional: alumno.correoInstitucional,
-            fecha_nacimiento: alumno.fechaNacimiento,
-            sexo: alumno.sexo,
-            direccion: alumno.direccion
-        },
+        data: toPrismaAlumno(alumno),
         where:{
             id_alumno: idAlumno
         }
     });
 
-    return {respuesta:'OK'};
+    return RESPONSE_UPDATE_OK;
 }
 
 
@@ -64,5 +51,5 @@ export const eliminarAlumno = async (idAlumno: number) => {
             id_alumno: idAlumno
         }
     });
-    return {respuesta:'OK'};
+    return RESPONSE_DELETE_OK;
 }

@@ -9,6 +9,7 @@ import alumnoRoutes from './routes/alumnoRoutes';
 const app: Application = express();
 
 //Database
+// Sdorot
 
 //Midlewares
 app.use(express.json());

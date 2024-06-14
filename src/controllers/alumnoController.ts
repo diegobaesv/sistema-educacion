@@ -5,6 +5,7 @@ import { ResponseModel } from "../models/ResponseModel";
 export const insertarAlumno = async (req: Request, res: Response) => {
     console.log('alumnoController::insertarAlumno');
     try {
+        
         const response = await alumnoService.insertarAlumno(req.body);
         res.status(200).json(ResponseModel.success(null,response));
     } catch (error) {

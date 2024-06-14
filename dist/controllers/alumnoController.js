@@ -34,14 +34,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarAlumno = exports.modificarAlumno = exports.obtenerAlumno = exports.listarAlumnos = exports.insertarAlumno = void 0;
 const alumnoService = __importStar(require("../services/alumnoService"));
+const ResponseModel_1 = require("../models/ResponseModel");
 const insertarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('alumnoController::insertarAlumno');
     try {
         const response = yield alumnoService.insertarAlumno(req.body);
-        res.status(200).json(response);
+        res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }
     catch (error) {
-        res.status(500).json({ error: error });
+        console.error(error.message);
+        res.status(500).json(ResponseModel_1.ResponseModel.error(error.message));
     }
 });
 exports.insertarAlumno = insertarAlumno;
@@ -49,10 +51,11 @@ const listarAlumnos = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     console.log('alumnoController::listarAlumnos');
     try {
         const alumnos = yield alumnoService.listarAlumnos();
-        res.status(200).json(alumnos);
+        res.status(200).json(ResponseModel_1.ResponseModel.success(alumnos));
     }
     catch (error) {
-        res.status(500).json({ error: error });
+        console.error(error.message);
+        res.status(500).json(ResponseModel_1.ResponseModel.error(error.message));
     }
 });
 exports.listarAlumnos = listarAlumnos;
@@ -61,10 +64,11 @@ const obtenerAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { id } = req.params;
         const alumno = yield alumnoService.obtenerAlumno(Number(id));
-        res.status(200).json(alumno);
+        res.status(200).json(ResponseModel_1.ResponseModel.success(alumno));
     }
     catch (error) {
-        res.status(500).json({ error: error });
+        console.error(error.message);
+        res.status(500).json(ResponseModel_1.ResponseModel.error(error.message));
     }
 });
 exports.obtenerAlumno = obtenerAlumno;
@@ -73,10 +77,11 @@ const modificarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function
     try {
         const { id } = req.params;
         const response = yield alumnoService.modificarAlumno(Number(id), req.body);
-        res.status(200).json(response);
+        res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }
     catch (error) {
-        res.status(500).json({ error: error });
+        console.error(error.message);
+        res.status(500).json(ResponseModel_1.ResponseModel.error(error.message));
     }
 });
 exports.modificarAlumno = modificarAlumno;
@@ -85,10 +90,11 @@ const eliminarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { id } = req.params;
         const response = yield alumnoService.eliminarAlumno(Number(id));
-        res.status(200).json(response);
+        res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }
     catch (error) {
-        res.status(500).json({ error: error });
+        console.error(error.message);
+        res.status(500).json(ResponseModel_1.ResponseModel.error(error.message));
     }
 });
 exports.eliminarAlumno = eliminarAlumno;

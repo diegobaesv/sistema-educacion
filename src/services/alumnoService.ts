@@ -14,7 +14,11 @@ export const insertarAlumno = async (alumno: IAlumno) => {
 }
 
 export const listarAlumnos = async () => {
-    const alumnos: alumnos[] = await prisma.alumnos.findMany();
+    const alumnos: alumnos[] = await prisma.alumnos.findMany({
+        where: {
+            estado_auditoria: '1'
+        }
+    });
     return alumnos.map((alumno: alumnos)=> fromPrismaAlumno(alumno));
 }
 
@@ -23,7 +27,8 @@ export const obtenerAlumno = async (idAlumno: number) => {
 
     const alumno: alumnos =  await prisma.alumnos.findUnique({
         where: {
-            id_alumno: idAlumno
+            id_alumno: idAlumno,
+            estado_auditoria: '1'
         }
     });
 
@@ -32,7 +37,6 @@ export const obtenerAlumno = async (idAlumno: number) => {
 
 export const modificarAlumno = async (idAlumno: number, alumno:IAlumno) => {
     console.log('alumnoService::modificarAlumno',idAlumno,alumno);
-
     await prisma.alumnos.update({
         data: toPrismaAlumno(alumno),
         where:{
@@ -46,10 +50,20 @@ export const modificarAlumno = async (idAlumno: number, alumno:IAlumno) => {
 
 export const eliminarAlumno = async (idAlumno: number) => {
     console.log('alumnoService::eliminarAlumno',idAlumno);
-    await prisma.alumnos.delete({
+
+    await prisma.alumnos.update({
+        data: {
+            estado_auditoria: '0'
+        },
         where: {
             id_alumno: idAlumno
         }
-    });
+    })
+
+    /*await prisma.alumnos.delete({
+        where: {
+            id_alumno: idAlumno
+        }
+    });*/
     return RESPONSE_DELETE_OK;
 }

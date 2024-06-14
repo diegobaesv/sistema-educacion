@@ -8,9 +8,9 @@ datasource db {
 }
 
 model alumnos {
-  id_alumno            Int       @id(map: "alumno_pkey") @default(autoincrement())
+  id_alumno            Int       @id @default(autoincrement())
   codigo               String    @db.VarChar(10)
-  documento_identidad  String    @db.VarChar(8)
+  documento_identidad  String    @db.Char(8)
   nombres              String    @db.VarChar(100)
   apellido_paterno     String    @db.VarChar(100)
   apellido_materno     String    @db.VarChar(100)
@@ -19,8 +19,8 @@ model alumnos {
   sexo                 String    @db.Char(1)
   direccion            String?   @db.VarChar(1024)
   estado_auditoria     String    @default(dbgenerated("1")) @db.Char(1)
-  fecha_creacion       DateTime  @default(now()) @db.Timestamptz(6)
-  fecha_modificacion   DateTime? @db.Timestamptz(6)
+  fecha_creacion       DateTime  @default(now()) @db.Timestamp(6)
+  fecha_modificacion   DateTime? @db.Timestamp(6)
 }
 
 model carreras {
@@ -30,6 +30,7 @@ model carreras {
   estado_auditoria   String    @default(dbgenerated("1")) @db.Char(1)
   fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
   fecha_modificacion DateTime? @db.Timestamp(6)
+  cursos             cursos[]
 }
 
 model docentes {
@@ -67,4 +68,17 @@ model sedes {
   estado_auditoria   String    @default(dbgenerated("1")) @db.Char(1)
   fecha_creacion     DateTime  @default(now()) @db.Time(6)
   fecha_modificacion DateTime? @db.Time(6)
+}
+
+model cursos {
+  id_curso           Int       @id @default(autoincrement())
+  id_carrera         Int
+  nombre             String    @db.VarChar(250)
+  bloque             String?   @db.VarChar(100)
+  ciclo              String?   @db.VarChar(2)
+  malla              Int?
+  estado_auditoria   String    @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime? @db.Timestamp(6)
+  carreras           carreras  @relation(fields: [id_carrera], references: [id_carrera], onDelete: NoAction, onUpdate: NoAction, map: "fk_cursos_carreras")
 }

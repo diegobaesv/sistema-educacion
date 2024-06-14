@@ -2,7 +2,7 @@ import { alumnos } from "@prisma/client"
 import { IAlumno } from "../models/Alumno"
 
 export const fromPrismaAlumno = (alumno: alumnos): any=> ({
-    idAlumno: 1,
+    idAlumno: alumno.id_alumno,
     codigo: alumno.codigo,
     documentoIdentidad: alumno.documento_identidad,
     nombres: alumno.nombres,

@@ -7,6 +7,6 @@ router.post('/',insertarAlumno);
 router.get('/',listarAlumnos);
 router.get('/:id',obtenerAlumno);
 router.put('/:id',modificarAlumno);
-router.delete('/:id',eliminarAlumno);
+router.patch('/:id',eliminarAlumno);
 
 export default router;

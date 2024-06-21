@@ -11,7 +11,8 @@ export const fromPrismaAlumno = (alumno: alumnos): any=> ({
     correoInstitucional: alumno.correo_institucional,
     fechaNacimiento: alumno.fecha_nacimiento,
     sexo: alumno.sexo,
-    direccion: alumno.direccion
+    direccion: alumno.direccion,
+    fechaCreacion: alumno.fecha_creacion
 });
 
 export const toPrismaAlumno = (alumno: IAlumno): any => ({

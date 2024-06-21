@@ -12,7 +12,8 @@ export const fromPrismaDocente = (docente: docentes): any=> ({
     fechaNacimiento: docente.fecha_nacimiento,
     sexo: docente.sexo,
     direccion: docente.direccion, 
-    especialidad: docente.especialidad
+    especialidad: docente.especialidad,
+    fechaCreacion: docente.fecha_creacion
 });
 
 export const toPrismaDocente = (docente: IDocente): any => ({

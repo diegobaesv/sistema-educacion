@@ -7,7 +7,8 @@ export const fromPrismaSede = (sede: sedes): any=> ({
     departamento: sede.departamento,
     provincia: sede.provincia,
     distrito: sede.distrito,
-    direccion: sede.direccion
+    direccion: sede.direccion,
+    fechaCreacion: sede.fecha_creacion
 });
 
 export const toPrismaSede = (sede: ISede): any => ({
